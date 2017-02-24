@@ -5,11 +5,13 @@ import java.util.Scanner;
 
 public class CharacterCreator {
     Scanner input = new Scanner(System.in);
+    Player player = new Player();
 
     public void createCharacter() {
         genderSelect();
         raceSelect();
         classSelect();
+        finalStep();
     }
 
     //Character creator
@@ -47,6 +49,12 @@ public class CharacterCreator {
         if (choice.equals("HUMAN") || choice.equals("CYBORG") || choice.equals("MARTIAN") ||
                 choice.equals("ROBOT")|| choice.equals("MUTANT")) {
             correct = true;
+
+            // SImple hardcoded setup that makes the player into human. no matter his choice :P
+            RaceBuilder raceBuilder = new RaceBuilder();
+            player.setPlayerRace(raceBuilder.human);
+
+
         } else {
             System.out.println("Invalid choice, please try again.");
             raceSelect();
@@ -70,9 +78,17 @@ public class CharacterCreator {
         if (choice.equals("SOLDIER") || choice.equals("HACKER") || choice.equals("PALADIN") ||
                 choice.equals("TELEPATH") || choice.equals("FIGHTER")) {
             correct = true;
+
         } else {
             System.out.println("Not a class, please try again.");
             classSelect();
         }
+    }
+
+    public void finalStep() {
+        System.out.println("Character creation complete!");
+        System.out.println("You picked race " + player.getRaceName());
+        double str =0; // dirty hack not sure why i have to do this
+        System.out.println("Your strength is " + player.getStr());
     }
 }
